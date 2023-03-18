@@ -60,7 +60,7 @@ jobs:
 
       - name: Create release
         id: release
-        uses: Multiverse/release-on-push-action@skip_prs
+        uses: simcop2387/release-on-push-action-multiverse@skip_prs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
