@@ -59,8 +59,7 @@ abstract class AbstractWorldGroupManager implements WorldGroupManager {
             }
         }
         // Only use the default group for worlds managed by MV-Core
-        if (worldGroups.isEmpty() && plugin.getMVIConfig().isDefaultingUngroupedWorlds() &&
-                plugin.getCore().getMVWorldManager().isMVWorld(worldName)) {
+        if (worldGroups.isEmpty() && plugin.getMVIConfig().isDefaultingUngroupedWorlds()) {
             Logging.finer("Returning default group for world: " + worldName);
             worldGroups.add(getDefaultGroup());
         }
