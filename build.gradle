@@ -85,6 +85,7 @@ tasks.withType(JavaCompile).configureEach {
 
 tasks.withType(Javadoc).configureEach {
     options.encoding = 'UTF-8'
+    enabled = false
 }
 
 

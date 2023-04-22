@@ -3,6 +3,7 @@ package com.onarandombox.multiverseinventories;
 import com.onarandombox.multiverseinventories.share.Sharable;
 import com.onarandombox.multiverseinventories.share.Sharables;
 import com.onarandombox.multiverseinventories.share.Shares;
+import com.onarandombox.multiverseinventories.InventoriesConfig.Path;
 import com.onarandombox.multiverseinventories.profile.container.ProfileContainer;
 import org.bukkit.World;
 import org.bukkit.event.EventPriority;
@@ -10,6 +11,7 @@ import org.bukkit.event.EventPriority;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
 
 public final class WorldGroup {
 
@@ -174,7 +176,21 @@ public final class WorldGroup {
      * @return True if specified world is part of this group.
      */
     public boolean containsWorld(String worldName) {
-        return this.getWorlds().contains(worldName.toLowerCase());
+        return this.containsWorld(worldName, true);
+    }
+
+    public boolean containsWorld(String worldName, boolean checkDefaults) {
+        boolean direct = this.getWorlds().contains(worldName.toLowerCase());
+
+        boolean byDefault = false;
+        
+        if (checkDefaults && this.isDefault() && plugin.getMVIConfig().isDefaultingUngroupedWorlds()) {
+            List<WorldGroup> groups = plugin.getGroupManager().getGroupsForWorld(worldName);
+
+            byDefault = !groups.isEmpty();
+        }
+
+        return direct || byDefault;
     }
 
     /**
